@@ -1,37 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="#FBE3B1">
 
-    <EditText
-        android:id="@+id/inputEmail"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:hint="Email" />
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
-    <EditText
-        android:id="@+id/inputPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:minHeight="48dp"
-        android:inputType="textPassword" />
+        <!-- Logo dan subtitle -->
+        <TextView
+            android:id="@+id/appTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cafe - x"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginTop="40dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temukan Kafe Di Bandung"
+            android:textSize="14sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="24dp" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lupa Password" />
+        <!-- Card container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:layout_margin="12dp"
+            android:elevation="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:clipToOutline="true"
+            android:background="@drawable/bg_rounded_container">
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login" />
+            <!-- Toggle Tab -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_toggle_border"
+                android:padding="4dp">
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/tabMasuk"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Masuk"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/bg_toggle_left"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tabDaftar"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Daftarkan Cafe"
+                    android:textColor="#8B4513"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Input Email -->
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textColor="#8B4513"
+                android:textColorHint="#8B4513"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#8B4513" />
+
+            <!-- Input Password -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <EditText
+                    android:id="@+id/editPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:textColor="#8B4513"
+                    android:textColorHint="#8B4513"
+                    android:backgroundTint="#8B4513"
+                    android:paddingEnd="40dp" />
+
+                <ImageView
+                    android:id="@+id/ivTogglePassword"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@android:drawable/ic_menu_view"
+                    android:tint="#8B4513"
+                    android:layout_marginEnd="8dp" />
+            </RelativeLayout>
+
+            <!-- Lupa Password -->
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lupa password?"
+                android:textColor="#8B4513"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="end" />
+
+            <!-- Tombol Login -->
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textColor="#FFF7DE"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_button_rounded" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

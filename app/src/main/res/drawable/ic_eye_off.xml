@@ -1,0 +1,10 @@
+<!-- res/drawable/ic_eye_off.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#8B4513"
+        android:pathData="M12 4.5C7.305 4.5 3.135 7.235 1.5 12c.6 1.605 1.635 3.015 2.865 4.185L3 17.55l1.44 1.44 1.365-1.365c1.17 1.23 2.58 2.265 4.185 2.865 4.77-1.635 7.5-5.805 7.5-10.5S16.77 4.5 12 4.5zm0 13.5c-3.33 0-6-2.67-6-6 0-.75.15-1.47.435-2.115L16.615 16.065C15.465 17.325 13.8 18 12 18zM12 6c3.33 0 6 2.67 6 6 0 .75-.15 1.47-.435 2.115L7.385 7.935C8.535 6.675 10.2 6 12 6z"/>
+</vector>
