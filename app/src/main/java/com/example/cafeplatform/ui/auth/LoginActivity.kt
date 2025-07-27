@@ -2,9 +2,11 @@ package com.example.cafeplatform.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.cafeplatform.R
 import com.example.cafeplatform.databinding.ActivityLoginBinding
 import com.example.cafeplatform.ui.admin.AdminHomeActivity
 
@@ -38,6 +40,14 @@ class LoginActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
+
+        val tabDaftar = findViewById<TextView>(R.id.tabDaftar)
+
+        tabDaftar.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 

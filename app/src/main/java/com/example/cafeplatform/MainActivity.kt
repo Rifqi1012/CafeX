@@ -30,9 +30,9 @@ import androidx.compose.runtime.*
 import com.example.cafeplatform.ui.auth.LoginActivity
 import android.content.Intent
 import androidx.compose.ui.platform.LocalContext
+import com.example.cafeplatform.ui.admin.AdminLoginActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import coil.compose.AsyncImage
- 
 
 
 class MainActivity : ComponentActivity() {
@@ -216,8 +216,8 @@ fun Header() {
 
                 Button(
                     onClick = {
-                        // TODO: Navigasi ke LoginAdminActivity
                         showSheet = false
+                        context.startActivity(Intent(context, AdminLoginActivity::class.java))
                     },
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
@@ -277,6 +277,7 @@ fun CafeCard(cafe: Cafe) {
                 Text(text = cafe.alamat, fontSize = 12.sp, color = Color(0xFF834D1E))
                 Text(text = "Rating: ${cafe.rating}", fontWeight = FontWeight.Medium, color = Color(0xFF834D1E))
             }
+
         }
     }
 }
