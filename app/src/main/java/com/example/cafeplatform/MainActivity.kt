@@ -31,6 +31,8 @@ import com.example.cafeplatform.ui.auth.LoginActivity
 import android.content.Intent
 import androidx.compose.ui.platform.LocalContext
 import com.example.cafeplatform.ui.admin.AdminLoginActivity
+import com.google.firebase.firestore.FirebaseFirestore
+import coil.compose.AsyncImage
 
 
 class MainActivity : ComponentActivity() {
@@ -49,25 +51,41 @@ class MainActivity : ComponentActivity() {
 
 // Data class
 data class Cafe(
-    val name: String,
-    val address: String,
-    val rating: Double,
-    val imageRes: Int
+    val nama: String = "",
+    val alamat: String = "",
+    val foto: String = "", // nanti di-load dari Firebase Storage
+    val link_gmaps: String = "",
+    val rating: Double = 0.0,
+    val owner_uid: String = ""
 )
+
 
 
 
 // Main UI
 @Composable
 fun HomeScreen() {
-    val cafes = List(4) {
-        Cafe(
-            name = "Cafe Cerita Kita",
-            address = "Jl. Cerita Indah No.3, Antapani Tengah, Bandung 40291",
-            rating = 4.3,
-            imageRes = R.drawable.cafexlogonobg
-        )
+    val db = FirebaseFirestore.getInstance()
+    var cafes by remember { mutableStateOf(listOf<Cafe>()) }
+
+    LaunchedEffect(Unit) {
+        db.collection("cafe")
+            .get()
+            .addOnSuccessListener { result ->
+                val data = result.map { it.toObject(Cafe::class.java) }
+                cafes = data
+            }
     }
+
+    LazyColumn {
+        items(cafes) { cafe ->
+            CafeCard(cafe)
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+    }
+
+
+
 
     @Composable
     fun SearchBar() {
@@ -235,7 +253,7 @@ fun CafeCard(cafe: Cafe) {
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFFCF2D9) // Background card
+            containerColor = Color(0xFFFCF2D9)
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
@@ -245,8 +263,8 @@ fun CafeCard(cafe: Cafe) {
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = cafe.imageRes),
+            AsyncImage(
+                model = cafe.foto,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -255,38 +273,9 @@ fun CafeCard(cafe: Cafe) {
             )
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = cafe.name,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF834D1E)
-                )
-                Text(
-                    text = cafe.address,
-                    fontSize = 12.sp,
-                    color = Color(0xFF834D1E)
-                )
-                Text(
-                    text = "Rating : ${cafe.rating}",
-                    fontWeight = FontWeight.Medium,
-                    color = Color(0xFF834D1E)
-                )
-            }
-            val context = LocalContext.current
-
-            IconButton(onClick = {
-                val intent = Intent(context, DetailCafeActivity::class.java).apply {
-                    putExtra("name", cafe.name)
-                    putExtra("address", cafe.address)
-                    putExtra("rating", cafe.rating)
-                    putExtra("imageRes", cafe.imageRes)
-                }
-                context.startActivity(intent)
-            }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_eye_on),
-                    contentDescription = "Lihat",
-                    tint = Color(0xFF834D1E)
-                )
+                Text(text = cafe.nama, fontWeight = FontWeight.Bold, color = Color(0xFF834D1E))
+                Text(text = cafe.alamat, fontSize = 12.sp, color = Color(0xFF834D1E))
+                Text(text = "Rating: ${cafe.rating}", fontWeight = FontWeight.Medium, color = Color(0xFF834D1E))
             }
 
         }
