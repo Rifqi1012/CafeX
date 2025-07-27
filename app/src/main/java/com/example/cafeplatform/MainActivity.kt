@@ -30,6 +30,7 @@ import androidx.compose.runtime.*
 import com.example.cafeplatform.ui.auth.LoginActivity
 import android.content.Intent
 import androidx.compose.ui.platform.LocalContext
+import com.example.cafeplatform.ui.admin.AdminLoginActivity
 
 
 class MainActivity : ComponentActivity() {
@@ -197,8 +198,8 @@ fun Header() {
 
                 Button(
                     onClick = {
-                        // TODO: Navigasi ke LoginAdminActivity
                         showSheet = false
+                        context.startActivity(Intent(context, AdminLoginActivity::class.java))
                     },
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
@@ -270,13 +271,24 @@ fun CafeCard(cafe: Cafe) {
                     color = Color(0xFF834D1E)
                 )
             }
-            IconButton(onClick = { }) {
+            val context = LocalContext.current
+
+            IconButton(onClick = {
+                val intent = Intent(context, DetailCafeActivity::class.java).apply {
+                    putExtra("name", cafe.name)
+                    putExtra("address", cafe.address)
+                    putExtra("rating", cafe.rating)
+                    putExtra("imageRes", cafe.imageRes)
+                }
+                context.startActivity(intent)
+            }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_eye_on),
                     contentDescription = "Lihat",
-                    tint = Color(0xFF834D1E) // Icon warna coklat tua
+                    tint = Color(0xFF834D1E)
                 )
             }
+
         }
     }
 }
