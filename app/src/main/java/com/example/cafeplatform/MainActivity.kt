@@ -29,6 +29,7 @@ import com.example.cafeplatform.ui.theme.CafeplatformTheme
 import androidx.compose.runtime.*
 import com.example.cafeplatform.ui.auth.LoginActivity
 import android.content.Intent
+import android.util.Log
 import androidx.compose.ui.platform.LocalContext
 import com.example.cafeplatform.ui.admin.AdminLoginActivity
 import com.google.firebase.firestore.FirebaseFirestore
@@ -79,10 +80,21 @@ fun HomeScreen() {
 
     LazyColumn {
         items(cafes) { cafe ->
-            CafeCard(cafe)
+            val context = LocalContext.current
+
+            CafeCard(cafe = cafe, onDetailClick = {
+                val intent = Intent(context, DetailCafeActivity::class.java).apply {
+                    putExtra("name", cafe.nama)
+                    putExtra("address", cafe.alamat)
+                    putExtra("rating", cafe.rating)
+                    putExtra("imageUrl", cafe.foto)
+                }
+                context.startActivity(intent)
+            })
             Spacer(modifier = Modifier.height(8.dp))
         }
     }
+
 
 
 
@@ -138,13 +150,30 @@ fun HomeScreen() {
         ) {
             Text("Daftar Kafe Di Bandung")
         }
-        Spacer(modifier = Modifier.height(12.dp))
-        LazyColumn {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
             items(cafes) { cafe ->
-                CafeCard(cafe)
+                val context = LocalContext.current
+                CafeCard(cafe = cafe, onDetailClick = {
+                    val intent = Intent(context, DetailCafeActivity::class.java).apply {
+                        putExtra("name", cafe.nama)
+                        putExtra("address", cafe.alamat)
+                        putExtra("rating", cafe.rating)
+                        putExtra("imageUrl", cafe.foto)
+                    }
+                    context.startActivity(intent)
+                })
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
+        Spacer(modifier = Modifier.height(12.dp))
+//        LazyColumn {
+//            items(cafes) { cafe ->
+//                CafeCard(cafe)
+//                Spacer(modifier = Modifier.height(8.dp))
+//            }
+//        }
     }
 }
 
@@ -248,7 +277,7 @@ fun SearchBar() {
 }
 
 @Composable
-fun CafeCard(cafe: Cafe) {
+fun CafeCard(cafe: Cafe, onDetailClick: () -> Unit = {}) {
     Card(
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier.fillMaxWidth(),
@@ -271,14 +300,25 @@ fun CafeCard(cafe: Cafe) {
                     .size(70.dp)
                     .background(Color.Gray, shape = RoundedCornerShape(8.dp))
             )
+
             Spacer(modifier = Modifier.width(12.dp))
+
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = cafe.nama, fontWeight = FontWeight.Bold, color = Color(0xFF834D1E))
                 Text(text = cafe.alamat, fontSize = 12.sp, color = Color(0xFF834D1E))
                 Text(text = "Rating: ${cafe.rating}", fontWeight = FontWeight.Medium, color = Color(0xFF834D1E))
             }
 
+            // Tombol Detail
+            IconButton(onClick = onDetailClick) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_eye_on),
+                    contentDescription = "Detail",
+                    tint = Color(0xFF834D1E)
+                )
+            }
         }
     }
 }
+
 
