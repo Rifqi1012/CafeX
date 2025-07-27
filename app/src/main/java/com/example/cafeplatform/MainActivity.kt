@@ -88,6 +88,7 @@ fun HomeScreen() {
                     putExtra("address", cafe.alamat)
                     putExtra("rating", cafe.rating)
                     putExtra("imageUrl", cafe.foto)
+                    putExtra("mapUrl", cafe.link_gmaps)
                 }
                 context.startActivity(intent)
             })
@@ -161,6 +162,8 @@ fun HomeScreen() {
                         putExtra("address", cafe.alamat)
                         putExtra("rating", cafe.rating)
                         putExtra("imageUrl", cafe.foto)
+                        putExtra("mapUrl", cafe.link_gmaps)
+
                     }
                     context.startActivity(intent)
                 })

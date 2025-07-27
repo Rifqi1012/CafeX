@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Cafeplatform"
         tools:targetApi="31">
 
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -24,6 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.admin.AdminHomeActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.admin.AdminLoginActivity"
             android:exported="true" />
@@ -47,6 +51,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".MainActivity" />
         <activity android:name=".DetailCafeActivity" />
+
     </application>
 
 </manifest>

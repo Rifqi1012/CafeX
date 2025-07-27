@@ -85,7 +85,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="12dp"
                     android:src="@drawable/ic_eye_on"
-                    android:tint="#8B4513" />
+                    />
             </RelativeLayout>
 
             <!-- Lupa Password -->

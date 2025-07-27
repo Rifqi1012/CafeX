@@ -69,6 +69,9 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation (libs.firebase.storage)
     implementation(libs.coil.compose)
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
+
 
 
 

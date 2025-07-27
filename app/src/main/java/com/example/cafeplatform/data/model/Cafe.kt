@@ -6,5 +6,6 @@ data class Cafe(
     val rating: Int = 0,
     val link_gmaps: String = "",
     val foto: String? = null,
-    val owner_uid: String = ""
+    val owner_uid: String = "",
+    val status: String = ""
 )
