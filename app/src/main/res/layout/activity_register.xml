@@ -131,7 +131,7 @@
                     android:paddingEnd="40dp" />
 
                 <ImageView
-                    android:id="@+id/ivTogglePassword"
+                    android:id="@+id/ivToggleConfirmPassword"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentEnd="true"

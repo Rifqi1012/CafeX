@@ -34,6 +34,11 @@ class LoginActivity : AppCompatActivity() {
 
             viewModel.login(email, password)
         }
+
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
     }
 
     private fun observeViewModel() {
